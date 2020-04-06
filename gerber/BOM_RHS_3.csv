@@ -1,23 +1,23 @@
-"Id";"Designator";"Package";"Quantity";"Designation";"Supplier and ref";
-1;"R1";"R_0805_2012Metric_Pad1.15x1.40mm_HandSolder";1;"10k";;;
-2;"C11,C12";"C_0805_2012Metric_Pad1.15x1.40mm_HandSolder";2;"9p";;;
-3;"BT1";"CR2477_Surface_Mount";1;"Battery";;;
-4;"R6,R4,R5,R7";"R_0805_2012Metric_Pad1.15x1.40mm_HandSolder";4;"1M";;;
-5;"C10,C8,C9,C13";"C_0805_2012Metric_Pad1.15x1.40mm_HandSolder";4;"10p";;;
-6;"IC1";"TQFP-32_7x7mm_P0.8mm";1;"ATMEGA328P-A";;;
-7;"IC2";"CC1101_Module";1;"CC1101";;;
-8;"P6";"PinHeader_1x06_P2.54mm_Vertical";1;"FTDI";;;
-9;"P7";"PinHeader_2x05_P2.54mm_Vertical";1;"ISP 10";;;
-10;"C1,C2,C3,C7";"C_0805_2012Metric_Pad1.15x1.40mm_HandSolder";4;"100n";;;
-11;"D1";"LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder";1;"LED Red";;;
-12;"D2";"LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder";1;"LED Green";;;
-13;"P4";"ISP_Side";1;"ISP Bottom";;;
-14;"P5";"ISP_Side";1;"ISP Top";;;
-15;"R2,R3";"R_0805_2012Metric_Pad1.15x1.40mm_HandSolder";2;"1k5";;;
-16;"U1,U2,U3";"SOT-23";3;"TLE4913";;;
-17;"C4,C5,C6";"C_0805_2012Metric_Pad1.15x1.40mm_HandSolder";3;"10n";;;
-18;"SW1";"MicroSwitch_3x4";1;"Reset";;;
-19;"SW2";"MicroSwitch_3x4";1;"Config";;;
-20;"Y1";"Crystal_SMD_3215-2Pin_3.2x1.5mm";1;"Crystal_Small";;;
-21;"J1";"TerminalBlock_bornier-2_P5.08mm";1;"Glass Breakage Detector";;;
-22;"J2";"Pin_D1.0mm_L10.0mm";1;"ANT";;;
+Reference, Quantity, Value, Footprint, Datasheet, LCSC Part #, Reichelt
+BT1 ,1,"Battery","libraries:CR2477_Surface_Mount",""
+C1 C2 C3 C7 ,4,"100n","Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder","","C49678",""
+C10 C9 C8 C13 ,4,"10p","Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder","","C1785",""
+C11 C12 ,2,"9p","Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder",""
+C4 C5 C6 ,3,"10n","Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder","","C1710",""
+D1 ,1,"LED Red","LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder","","C84256",""
+D2 ,1,"LED Green","LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder","","C2297",""
+IC1 ,1,"ATMEGA328P-A","Package_QFP:TQFP-32_7x7mm_P0.8mm","","C14877",""
+IC2 ,1,"CC1101","libraries:CC1101_Module",""
+J1 ,1,"Glass Breakage Detector","Connector_JST:JST_XH_S2B-XH-A-1_1x02_P2.50mm_Horizontal","https://cdn-reichelt.de/documents/datenblatt/C100/JST_XH_DB_EN.pdf","","https://www.reichelt.de/jst-stiftleiste-gerade-1x2-polig-xh-jst-xh2p-st-p185073.html?&trstct=pol_1&nbc=1"
+J2 ,1,"ANT","Connector_Pin:Pin_D1.0mm_L10.0mm","~"
+P4 ,1,"ISP Bottom","libraries:ISP_Side",""
+P5 ,1,"ISP Top","libraries:ISP_Side",""
+P6 ,1,"FTDI","Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical","~"
+P7 ,1,"ISP 10","Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical","~"
+R1 ,1,"10k","Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder","","C17414",""
+R2 R3 ,2,"1k5","Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder","","C4310",""
+R4 R5 R6 R7 ,4,"1M","Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder","","C17514",""
+SW1 ,1,"Reset","libraries:MicroSwitch_3x4",""
+SW2 ,1,"Config","libraries:MicroSwitch_3x4",""
+U1 U2 U3 ,3,"TLE4913","Package_TO_SOT_SMD:SOT-23",""
+Y1 ,1,"Crystal_Small","Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm","https://www.mouser.de/datasheet/2/137/C-255_en-1649561.pdf"
