@@ -9,16 +9,6 @@
 //#define NDEBUG
 #define CONTACT_STATE_WITH_BATTERY
 
-#define CFG_STEPUP_BYTE 0x00
-#define CFG_STEPUP_OFF  0x00
-#define CFG_STEPUP_ON   0x01
-
-#define CFG_BAT_LOW_BYTE 0x01
-#define CFG_BAT_CRITICAL_BYTE 0x02
-
-// define device configuration bytes
-#define DEVICE_CONFIG CFG_STEPUP_OFF,22,19
-
 // 24 0030 4D455130323134373633 80 910101
 
 #define EI_NOTEXTERNAL
@@ -27,7 +17,7 @@
 #include <LowPower.h>
 
 #include <Register.h>
-#include <ThreeState.h>
+#include <ContactState.h>
 
 // we use a Pro Mini
 // Arduino pin for the LED
@@ -41,7 +31,7 @@
 #define SENS1_PIN 14
 #define SENS2_PIN 15
 #define SENS3_PIN 0 // 16
-#define SABOTAGE_PIN 0
+#define SABOTAGE_PIN 16
 
 // activate additional open detection by using a third sensor pins
 // #define SENS3_PIN 16
@@ -126,7 +116,7 @@ public:
     memcpy(posmap,pmap,4);
   }
   void measure (__attribute__((unused)) bool async=false) {
-    // switch Power on
+    // read sensor states
     uint8_t s1 = digitalRead(pin1);
     uint8_t s2 = digitalRead(pin2);
     uint8_t s3 =  (pin3 != 0) ? digitalRead(pin3) : LOW;
@@ -190,17 +180,13 @@ void funcISR () {
   sysclock.add(a);
 }
 
-//const uint8_t posmap[4] = {Position::State::PosB,Position::State::PosA,Position::State::PosC,Position::State::PosB};
 void setup () {
   DINIT(57600,ASKSIN_PLUS_PLUS_IDENTIFIER);
   sdev.init(hal);
-  buttonISR(cfgBtn,CONFIG_BUTTON_PIN);
-  sdev.channel(1).init(SENS1_PIN,SENS2_PIN,SENS3_PIN,SABOTAGE_PIN); //,posmap);
-  sdev.initDone();
   hal.battery.init(seconds2ticks(60UL*60),sysclock);
-
-  sdev.channel(1).set(seconds2ticks(1));
-  sysclock.add(sdev.channel(1));
+  buttonISR(cfgBtn,CONFIG_BUTTON_PIN);
+  sdev.channel(1).init(SENS1_PIN,SENS2_PIN,SENS3_PIN,SABOTAGE_PIN);
+  sdev.initDone();
 
   if( sdev.channel(1).interval() == 0 ) {
     // enable ISR - polling disabled
@@ -209,8 +195,15 @@ void setup () {
     if( SENS3_PIN != 0 ) {
       contactISR(SENS3_PIN,funcISR);
     }
+    if( SABOTAGE_PIN != 0 ) {
+      contactISR(SABOTAGE_PIN,funcISR);
+    }
   }
   hal.activity.stayAwake(seconds2ticks(15));
+  // wait for valid battery value
+  while( hal.battery.current() == 0 ) ;
+  // send initial state
+  sdev.channel(1).changed(true);
 }
 
 void loop() {
@@ -227,4 +220,3 @@ void loop() {
     hal.sleep<>();
   }
 }
-
