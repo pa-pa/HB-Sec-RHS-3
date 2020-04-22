@@ -3,11 +3,18 @@
 // 2020-03-29 papa Creative Commons - http://creativecommons.org/licenses/by-nc-sa/3.0/de/
 //- -----------------------------------------------------------------------------------------------------------------------
 
+// #define RHS3
 // define this to read the device id, serial and device type from bootloader section
 // #define USE_OTA_BOOTLOADER
-#define BATTERY_IRQ
-//#define NDEBUG
-#define CONTACT_STATE_WITH_BATTERY
+// #define NDEBUG
+
+#ifdef RHS3
+  // send battery value
+  #define CONTACT_STATE_WITH_BATTERY
+#else
+  #define BATTERY_LOW 22
+  #define BATTERY_CRITICAL 19
+#endif
 
 // 24 0030 4D455130323134373633 80 910101
 
@@ -30,12 +37,8 @@
 
 #define SENS1_PIN 14
 #define SENS2_PIN 15
-#define SENS3_PIN 0 // 16
-#define SABOTAGE_PIN 16
-
-// activate additional open detection by using a third sensor pins
-// #define SENS3_PIN 16
-// #define SABOTAGE_PIN 0
+#define SENS3_PIN 16   // use third sensor for extra open/close detection
+#define SABOTAGE_PIN 0 // 16
 
 // number of available peers per channel
 #define PEERS_PER_CHANNEL 10
@@ -44,20 +47,24 @@
 using namespace as;
 
 // define all device properties
-const struct DeviceInfo PROGMEM devinfo = {
+#ifdef RHS3
+  const struct DeviceInfo PROGMEM devinfo = {
     {0xa9,0xb8,0xc7},       // Device ID
     "papaa9b8c7",           // Device Serial
     {0xF2,0x09},            // Device Model
     0x10,                   // Firmware Version
     as::DeviceType::ThreeStateSensor, // Device Type
     {0x01,0x00}             // Info Bytes
-};
-
-
-#ifdef BATTERY_IRQ
-  typedef IrqInternalBatt BatSensor;
+  };
 #else
-  typedef BatterySensor BatSensor;
+  const struct DeviceInfo PROGMEM devinfo = {
+    {0x2b,0x65,0x98},       // Device ID
+    "TO3TZFT3X1",           // Device Serial
+    {0x00,0xC3},            // Device Model
+    0x22,                   // Firmware Version
+    as::DeviceType::ThreeStateSensor, // Device Type
+    {0x01,0x00}             // Info Bytes
+  };
 #endif
 
 /**
@@ -66,10 +73,14 @@ const struct DeviceInfo PROGMEM devinfo = {
 typedef AvrSPI<10,11,12,13> SPIType;
 typedef Radio<SPIType,2> RadioType;
 typedef DualStatusLed<LED2_PIN,LED1_PIN> LedType;
-typedef AskSin<LedType,BatSensor,RadioType> Hal;
+typedef AskSin<LedType,IrqInternalBatt,RadioType> Hal;
 Hal hal;
 
-DEFREGISTER(Reg0,DREG_CYCLICINFOMSG,MASTERID_REGS,DREG_TRANSMITTRYMAX,DREG_SABOTAGEMSG,DREG_LOWBATLIMIT)
+#ifdef RHS3
+  DEFREGISTER(Reg0,DREG_CYCLICINFOMSG,MASTERID_REGS,DREG_TRANSMITTRYMAX,DREG_SABOTAGEMSG,DREG_LOWBATLIMIT)
+#else
+  DEFREGISTER(Reg0,DREG_CYCLICINFOMSG,MASTERID_REGS,DREG_TRANSMITTRYMAX,DREG_SABOTAGEMSG)
+#endif
 class RHSList0 : public RegList0<Reg0> {
 public:
   RHSList0(uint16_t addr) : RegList0<Reg0>(addr) {}
@@ -78,7 +89,9 @@ public:
     cycleInfoMsg(true);
     transmitDevTryMax(6);
     sabotageMsg(true);
+#ifdef RHS3
     lowBatLimit(22); // default low bat 2.2V
+#endif
   }
 };
 
@@ -165,8 +178,13 @@ public:
   virtual void configChanged () {
     TSDevice::configChanged();
     // set battery low/critical values
+#ifdef RHS3
     battery().low(getList0().lowBatLimit());
     battery().critical(getList0().lowBatLimit()-3);
+#else
+    battery().low(BATTERY_LOW);
+    battery().critical(BATTERY_CRITICAL);
+#endif
   }
 };
 
