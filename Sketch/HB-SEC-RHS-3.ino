@@ -48,23 +48,23 @@ using namespace as;
 
 // define all device properties
 #ifdef RHS3
-  const struct DeviceInfo PROGMEM devinfo = {
+const struct DeviceInfo PROGMEM devinfo = {
     {0xa9,0xb8,0xc7},       // Device ID
     "papaa9b8c7",           // Device Serial
     {0xF2,0x09},            // Device Model
     0x10,                   // Firmware Version
     as::DeviceType::ThreeStateSensor, // Device Type
     {0x01,0x00}             // Info Bytes
-  };
+};
 #else
-  const struct DeviceInfo PROGMEM devinfo = {
-    {0x2b,0x65,0x98},       // Device ID
-    "TO3TZFT3X1",           // Device Serial
+const struct DeviceInfo PROGMEM devinfo = {
+    {0x09,0x56,0x34},       // Device ID
+    "papa222111",           // Device Serial
     {0x00,0xC3},            // Device Model
     0x22,                   // Firmware Version
     as::DeviceType::ThreeStateSensor, // Device Type
     {0x01,0x00}             // Info Bytes
-  };
+};
 #endif
 
 /**
@@ -153,13 +153,13 @@ public:
   ~ThreePinChannel () {}
 
   void init (uint8_t pin1,uint8_t pin2,uint8_t pin3,uint8_t sabpin,const uint8_t* pmap) {
-    BaseChannel::init(sabpin);
     BaseChannel::possens.init(pin1,pin2,pin3,pmap);
+    BaseChannel::init(sabpin);
   }
 
   void init (uint8_t pin1,uint8_t pin2,uint8_t pin3,uint8_t sabpin) {
-    BaseChannel::init(sabpin);
     BaseChannel::possens.init(pin1,pin2,pin3);
+    BaseChannel::init(sabpin);
   }
 
   uint32_t interval () { return BaseChannel::possens.interval(); }
