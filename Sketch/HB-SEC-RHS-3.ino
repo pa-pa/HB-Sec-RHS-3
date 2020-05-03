@@ -3,7 +3,10 @@
 // 2020-03-29 papa Creative Commons - http://creativecommons.org/licenses/by-nc-sa/3.0/de/
 //- -----------------------------------------------------------------------------------------------------------------------
 
-// #define RHS3
+// define this to implement new RHS3 device
+#define RHS3
+// send extra state 50 if sensor 3 is open
+// #define USE_FOUR_STATES
 // define this to read the device id, serial and device type from bootloader section
 // #define USE_OTA_BOOTLOADER
 // #define NDEBUG
@@ -133,13 +136,24 @@ public:
     uint8_t s1 = digitalRead(pin1);
     uint8_t s2 = digitalRead(pin2);
     uint8_t s3 =  (pin3 != 0) ? digitalRead(pin3) : LOW;
-    // DDEC(pin1);DPRINT(":");DDEC(s1);DPRINT(" ");DDEC(pin2);DPRINT(":");DDECLN(s2);
+    DPRINT("Pins: ");DDEC(s1);DDEC(s2);DDECLN(s3);
     uint8_t pinstate = s2 << 1 | s1;
     _position = posmap[pinstate & 0x03];
+#ifndef USE_FOUR_STATES
     if( _position == State::PosA && s3 == HIGH) {
       _position = State::PosB;
     }
+#endif
   }
+#ifdef USE_FOUR_STATES
+  uint8_t remap (uint8_t state) {
+    uint8_t s3 =  (pin3 != 0) ? digitalRead(pin3) : LOW;
+    if( state >= 100 && s3 == LOW ) {
+      return 50;
+    }
+    return state;
+  }
+#endif
   // disable polling
   uint32_t interval () { return 0; }
 };
