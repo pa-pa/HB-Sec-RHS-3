@@ -7,7 +7,7 @@
   ![Bootloader Settings](GenerateFirmware.png "Generate Firmware")
 * press "Create Bootloader" to generate bootloader together with firmware
 * use bootloader/avr/flash.sh "SAVEDFILE.hex" to flash
-* alternative use the following commands
+* alternative use the following commands (for USBAsp)
 ```bash
 avrdude -p m328p -P usb -c usbasp -B 10 -U lfuse:w:0xE2:m -U hfuse:w:0xD0:m -U efuse:w:0xFF:m -U lock:w:0xFF:m
 avrdude -p m328p -P usb -c usbasp -V -U flash:w:SAVEDFILE.hex
