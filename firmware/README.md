@@ -4,7 +4,7 @@
 * download [AskSinPP](https://github.com/pa-pa/AskSinPP) 
 * use bootloader/avr/make-ota.html to generate code to flash
 * set values as shown in the image
-  ![Bootloader Settings](GenerateFirmware.png?raw=true Generate Firmware)
+  ![Bootloader Settings](GenerateFirmware.png "Generate Firmware")
 * press "Create Bootloader" to generate bootloader together with firmware
 * use bootloader/avr/flash.sh "SAVEDFILE.hex" to flash
 * alternative use the following commands
