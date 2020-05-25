@@ -1,5 +1,5 @@
 
-# Generate Firmware for HB-Sec-RHS-3
+# Generate Firmware for HB-Sec-RHS-3 with OTA-Bootloader
 
 * download [AskSinPP](https://github.com/pa-pa/AskSinPP) 
 * use bootloader/avr/make-ota.html to generate code to flash
