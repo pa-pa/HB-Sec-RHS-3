@@ -6,7 +6,7 @@ encoding utf-8
 Sheet 1 1
 Title "RHS 3 - CR2477"
 Date ""
-Rev "1.1"
+Rev "2.0"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -196,17 +196,6 @@ F 1 "GND" H 2150 1550 50  0000 C CNN
 F 2 "" H 2150 1700 50  0000 C CNN
 F 3 "" H 2150 1700 50  0000 C CNN
 	1    2150 1700
-	1    0    0    -1  
-$EndComp
-$Comp
-L RHS_3-rescue:VCC-RHS_2-rescue #PWR06
-U 1 1 5910649D
-P 2150 1100
-F 0 "#PWR06" H 2150 950 50  0001 C CNN
-F 1 "VCC" H 2150 1250 50  0000 C CNN
-F 2 "" H 2150 1100 50  0000 C CNN
-F 3 "" H 2150 1100 50  0000 C CNN
-	1    2150 1100
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -522,17 +511,6 @@ F 3 "" H 9850 5200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L RHS_3-rescue:VCC-RHS_2-rescue #PWR0101
-U 1 1 5E6A4AE7
-P 8950 3800
-F 0 "#PWR0101" H 8950 3650 50  0001 C CNN
-F 1 "VCC" H 8950 3950 50  0000 C CNN
-F 2 "" H 8950 3800 50  0000 C CNN
-F 3 "" H 8950 3800 50  0000 C CNN
-	1    8950 3800
-	1    0    0    -1  
-$EndComp
-$Comp
 L RHS_3-rescue:R-RHS_2-rescue R4
 U 1 1 5E6B2724
 P 7900 4150
@@ -588,8 +566,6 @@ Wire Wire Line
 	8300 4300 8300 5300
 Wire Wire Line
 	1750 2850 1950 2850
-Wire Wire Line
-	8950 3800 8950 3900
 Wire Wire Line
 	8950 5200 9550 5200
 Wire Wire Line
@@ -1083,8 +1059,6 @@ Wire Wire Line
 	4950 3150 5200 3150
 Text Label 2550 1400 0    50   ~ 0
 GND
-Text Label 2550 1300 0    50   ~ 0
-VCC
 Wire Wire Line
 	4950 3350 5200 3350
 Wire Wire Line
@@ -1274,19 +1248,6 @@ Wire Wire Line
 Wire Wire Line
 	7200 1750 7300 1750
 Connection ~ 7850 800 
-$Comp
-L RHS_3-rescue:VCC-RHS_2-rescue #PWR0110
-U 1 1 5F9DD3AE
-P 7200 750
-F 0 "#PWR0110" H 7200 600 50  0001 C CNN
-F 1 "VCC" H 7200 900 50  0000 C CNN
-F 2 "" H 7200 750 50  0000 C CNN
-F 3 "" H 7200 750 50  0000 C CNN
-	1    7200 750 
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	7200 750  7200 800 
 Connection ~ 7200 800 
 $Comp
 L Device:R_Small R8
@@ -1739,4 +1700,115 @@ Wire Wire Line
 Connection ~ 5150 800 
 Wire Wire Line
 	5150 800  5450 800 
+$Comp
+L power:VSS #PWR0110
+U 1 1 5F820753
+P 7200 700
+F 0 "#PWR0110" H 7200 550 50  0001 C CNN
+F 1 "VSS" H 7215 873 50  0000 C CNN
+F 2 "" H 7200 700 50  0001 C CNN
+F 3 "" H 7200 700 50  0001 C CNN
+	1    7200 700 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7200 700  7200 800 
+$Comp
+L power:VSS #PWR0117
+U 1 1 5F83527D
+P 2150 1100
+F 0 "#PWR0117" H 2150 950 50  0001 C CNN
+F 1 "VSS" H 2165 1273 50  0000 C CNN
+F 2 "" H 2150 1100 50  0001 C CNN
+F 3 "" H 2150 1100 50  0001 C CNN
+	1    2150 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VSS #PWR0118
+U 1 1 5F8358EE
+P 7400 3400
+F 0 "#PWR0118" H 7400 3250 50  0001 C CNN
+F 1 "VSS" H 7415 3573 50  0000 C CNN
+F 2 "" H 7400 3400 50  0001 C CNN
+F 3 "" H 7400 3400 50  0001 C CNN
+	1    7400 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L RHS_3-rescue:VCC-RHS_2-rescue #PWR0119
+U 1 1 5F83706C
+P 6750 3400
+F 0 "#PWR0119" H 6750 3250 50  0001 C CNN
+F 1 "VCC" H 6750 3550 50  0000 C CNN
+F 2 "" H 6750 3400 50  0000 C CNN
+F 3 "" H 6750 3400 50  0000 C CNN
+	1    6750 3400
+	1    0    0    -1  
+$EndComp
+Text Label 2550 1300 0    50   ~ 0
+VSS
+$Comp
+L power:VDD #PWR0101
+U 1 1 5F87E9D0
+P 8950 3400
+F 0 "#PWR0101" H 8950 3250 50  0001 C CNN
+F 1 "VDD" H 8965 3573 50  0000 C CNN
+F 2 "" H 8950 3400 50  0001 C CNN
+F 3 "" H 8950 3400 50  0001 C CNN
+	1    8950 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Jumper_NO_Small JP1
+U 1 1 5F8BD3FD
+P 7050 3500
+F 0 "JP1" H 7050 3685 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 7050 3594 50  0000 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 7050 3500 50  0001 C CNN
+F 3 "~" H 7050 3500 50  0001 C CNN
+	1    7050 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Jumper_NO_Small JP2
+U 1 1 5F8BE151
+P 8650 3500
+F 0 "JP2" H 8650 3685 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 8650 3594 50  0000 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 8650 3500 50  0001 C CNN
+F 3 "~" H 8650 3500 50  0001 C CNN
+	1    8650 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L RHS_3-rescue:VCC-RHS_2-rescue #PWR0120
+U 1 1 5F8E9612
+P 8350 3400
+F 0 "#PWR0120" H 8350 3250 50  0001 C CNN
+F 1 "VCC" H 8350 3550 50  0000 C CNN
+F 2 "" H 8350 3400 50  0000 C CNN
+F 3 "" H 8350 3400 50  0000 C CNN
+	1    8350 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8950 3400 8950 3500
+Wire Wire Line
+	8350 3400 8350 3500
+Wire Wire Line
+	8350 3500 8550 3500
+Wire Wire Line
+	8750 3500 8950 3500
+Connection ~ 8950 3500
+Wire Wire Line
+	8950 3500 8950 3900
+Wire Wire Line
+	6750 3400 6750 3500
+Wire Wire Line
+	6750 3500 6950 3500
+Wire Wire Line
+	7150 3500 7400 3500
+Wire Wire Line
+	7400 3500 7400 3400
 $EndSCHEMATC
