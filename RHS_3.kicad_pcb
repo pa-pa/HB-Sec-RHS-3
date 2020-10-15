@@ -2132,7 +2132,7 @@
     (fp_text reference C27 (at 0 1.17 90) (layer B.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
     )
-    (fp_text value 100n (at 0 -1.17 90) (layer B.Fab) hide
+    (fp_text value 100p (at 0 -1.17 90) (layer B.Fab) hide
       (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
     )
     (fp_line (start -0.5 -0.25) (end -0.5 0.25) (layer B.Fab) (width 0.1))

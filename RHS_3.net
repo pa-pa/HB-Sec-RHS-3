@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source D:\holger\KiCad\Projects\HB-Sec-RHS-3\RHS_3.sch)
-    (date "10/11/20 18:57:54")
+    (date "10/15/20 19:30:59")
     (tool "Eeschema (5.1.5)-3")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -442,11 +442,11 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 5FA91DBC))
     (comp (ref C27)
-      (value 100n)
+      (value 100p)
       (footprint Capacitor_SMD:C_0402_1005Metric)
       (datasheet ~)
       (fields
-        (field (name "LCSC Part #") C1525))
+        (field (name "LCSC Part #") C1546))
       (libsource (lib Device) (part C_Small) (description "Unpolarized capacitor, small symbol"))
       (sheetpath (names /) (tstamps /))
       (tstamp 5FA93203))
