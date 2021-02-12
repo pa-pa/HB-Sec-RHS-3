@@ -11,6 +11,7 @@
 // define this to read the device id, serial and device type from bootloader section
 // #define USE_OTA_BOOTLOADER
 // #define NDEBUG
+#define CC1101_PWRPIN 0xff
 
 #ifdef RHS3
   // send battery value
@@ -75,7 +76,7 @@ const struct DeviceInfo PROGMEM devinfo = {
  * Configure the used hardware
  */
 typedef AvrSPI<10,11,12,13> SPIType;
-typedef Radio<SPIType,2> RadioType;
+typedef Radio<SPIType,2,CC1101_PWRPIN> RadioType;
 typedef DualStatusLed<LED2_PIN,LED1_PIN> LedType;
 typedef AskSin<LedType,IrqInternalBatt,RadioType> Hal;
 Hal hal;
